@@ -1,5 +1,5 @@
 module "website_dev_api" {
-  source      = "./modules/website_dev_api"
+  source      = "../../modules/website_dev_api"
   environment = var.environment
   aws_region  = var.aws_region
 
@@ -25,7 +25,7 @@ module "website_dev_api" {
 }
 
 module "jwt_token_api" {
-  source      = "./modules/jwt_token_api"
+  source      = "../../modules/jwt_token_api"
   environment = var.environment
   aws_region  = var.aws_region
 
@@ -37,7 +37,7 @@ module "jwt_token_api" {
 }
 
 module "lambda" {
-  source      = "./modules/lambda"
+  source      = "../../modules/lambda"
   environment = var.environment
   timeout     = var.timeout
   memory_size = var.memory_size
@@ -49,7 +49,7 @@ module "lambda" {
 }
 
 module "cloud_watch" {
-  source         = "./modules/cloud_watch"
+  source         = "../../modules/cloud_watch"
   log_group_name = var.log_group_name
 
   # Passing IAM role ARN if required by CloudWatch
@@ -58,7 +58,7 @@ module "cloud_watch" {
 
 
 module "ssm_parameter_store" {
-  source = "./modules/ssm_parameter_store"
+  source = "../../modules/ssm_parameter_store"
 
   flairgate_apiuser     = var.flairgate_apiuser
   flairgate_apipassword = var.flairgate_apipassword
@@ -66,7 +66,7 @@ module "ssm_parameter_store" {
 }
 
 module "dynamodb" {
-  source = "./modules/dynamodb"
+  source = "../../modules/dynamodb"
 
   dynamodb_table_name = var.dynamodb_table_name
   tags                = var.tags
@@ -74,12 +74,12 @@ module "dynamodb" {
 
 # global services
 module "iam_role" {
-  source        = "./global/iam_role"
+  source        = "../../global/iam_role"
   iam_role_name = var.iam_role_name
 }
 
 module "s3" {
-  source = "./global/s3"
+  source = "../../global/s3"
 
   terraform_state_bucket_name = var.terraform_state_bucket_name
   tags                        = var.tags
